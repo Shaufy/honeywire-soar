@@ -20,7 +20,7 @@ An automated threat monitoring and response architecture combining containerized
 
 1. **Clone the repository**:
    ```bash
-   git clone [https://github.com/Shaufy/honeywire-soar.git](https://github.com/Shaufy/honeywire-soar.git)
+   git clone https://github.com/Shaufy/honeywire-soar.git
    cd honeywire-soar
    ```
 
