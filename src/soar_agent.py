@@ -68,10 +68,7 @@ Respond ONLY with valid JSON using this exact structure:
         )
         content = response['message']['content'].strip()
         # Clean potential markdown formatting from LLM output
-        if content.startswith("```json"):
-            content = content[7:-3].strip()
-        elif content.startswith("```"):
-            content = content[3:-3].strip()
+        content = re.sub(r"^```(?:json)?\s*|\s*```$", "", content, flags=re.MULTILINE).strip()
         return json.loads(content)
     except Exception as e:
         print(f"[!] AI Analysis failed: {e}")
@@ -106,7 +103,7 @@ def send_discord_alert(ip, analysis):
         }]
     }
     try:
-        requests.post(WEBHOOK_URL, json=payload, timeout=5)
+        requests.post(DISCORD_WEBHOOK_URL, json=payload, timeout=5)
     except Exception as e:
         print(f"[!] Discord alert failed: {e}")
 
