@@ -7,7 +7,18 @@ import re
 import ollama
 
 # Configuration
-WEBHOOK_URL = "REMOVED_SECRET"
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+# Get the webhook URL from environment
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+
+if not DISCORD_WEBHOOK_URL:
+    print("[!] Warning: DISCORD_WEBHOOK_URL environment variable is not set.")
+
 WHITELIST_PATTERN = r"127\.0\.0\.1|10\.0\.2\.2|192\.168\."
 
 def is_whitelisted(ip):
