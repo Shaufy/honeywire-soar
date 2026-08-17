@@ -5,8 +5,6 @@ import subprocess
 import requests
 import re
 import ollama
-
-# Configuration
 import os
 from dotenv import load_dotenv
 
@@ -82,6 +80,10 @@ Respond ONLY with valid JSON using this exact structure:
 
 def send_discord_alert(ip, analysis):
     """Sends an AI-generated SOC briefing to Discord"""
+    if not DISCORD_WEBHOOK_URL:
+        print("[!] Discord webhook URL missing/unset. Skipping alert delivery.")
+        return
+
     color_map = {
         "CRITICAL": 15158332, # Red
         "HIGH": 15105570,     # Orange
